@@ -480,6 +480,17 @@ h1,h2,h3,p{margin:0}
   .post-featured{grid-row:auto}
   .post-img{height:320px}
 }
+@media (max-width:520px){
+  /* compact header so the hamburger always fits on narrow phones */
+  .brand img{height:38px}
+  .brand{gap:10px}
+  .brand-bdg{font-size:20px}
+  .brand-lines{padding-left:10px; gap:2px}
+  .brand-lines b{font-size:11px}
+  .brand-lines span{font-size:7px; letter-spacing:.22em}
+  .header-inner{gap:12px}
+  .nav-toggle{flex-shrink:0}
+}
 @media (max-width:900px){
   .tech-inner{grid-template-columns:1fr; padding-right:0}
   .tech-copy{padding:var(--pad-y) 0 8px}
