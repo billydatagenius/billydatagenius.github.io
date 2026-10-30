@@ -1,0 +1,15 @@
+# dev-only files — never published
+server.js
+PROMPT.md
+qa-*
+*.log
+tools-*.ps1
+
+# source/unused assets — the published site references only the files PROMPT.md lists
+images/*-original.jpg
+images/hero-founder.jpg
+images/Billy DSL.jpeg
+images/Braggs.jpg
+images/Futuristic Data Visionary with Holographic Globe.png
+images/Futuristic Digital Services Neon Panorama.png
+images/Sunset Workspace Over the City.png

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From Classroom to Code: What 14 Years of Teaching Taught Me About Data | Billy Data Genius</title>
+<meta name="description" content="Data science is less about machines and more about communication, structure and patience. What fourteen years as an educator and HOD taught me about building dashboards people actually use.">
+<link rel="icon" type="image/png" href="../images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-950:#050D1A; --navy-900:#081524; --card-a:#0B1A2E; --card-b:#071120;
+  --gold:#F2B33D; --gold-deep:#D99A26; --text-hi:#F4F8FD; --text-2:#C9D7E9;
+  --muted:#97A9C0; --muted-2:#7B8CA6;
+  --sans:"Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script:"Caveat", "Segoe Script", cursive;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0; background:var(--navy-950); color:var(--text-2); font-family:var(--sans); font-size:16px; line-height:1.9; -webkit-font-smoothing:antialiased}
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:4px}
+.top{background:var(--navy-900); border-bottom:1px solid rgba(146,178,214,.12)}
+.top-in{width:min(860px, 100% - 48px); margin-inline:auto; display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+.back{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--text-2)}
+.back svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .22s}
+.back:hover svg{transform:translateX(-3px)}
+.wordmark{display:flex; align-items:center; gap:10px}
+.wordmark img{width:30px}
+.wordmark b{font-size:15px; font-weight:700; color:var(--gold); letter-spacing:.02em}
+.wordmark small{font-size:8.5px; letter-spacing:.3em; color:var(--muted-2); display:block; line-height:1.3}
+article{width:min(720px, 100% - 48px); margin:clamp(44px, 7vw, 76px) auto 0}
+.kicker{display:flex; align-items:center; gap:12px; flex-wrap:wrap; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); font-weight:700}
+.kicker .date{color:var(--muted-2); letter-spacing:.08em; font-weight:500}
+h1{margin-top:18px; font-size:clamp(1.8rem, 4.2vw, 2.7rem); font-weight:700; line-height:1.22; color:var(--text-hi); letter-spacing:-.01em}
+.byline{margin-top:16px; font-size:12.5px; color:var(--muted)}
+.byline b{color:var(--text-2); font-weight:600}
+.rule{width:56px; height:3px; background:var(--gold); border-radius:2px; margin-top:26px}
+.lede{margin-top:26px; font-size:17.5px; line-height:1.85; color:#E3ECF6; font-weight:500}
+.body p{margin-top:22px}
+.body h2{margin-top:44px; font-size:clamp(1.25rem, 2.4vw, 1.55rem); font-weight:700; color:var(--text-hi); line-height:1.3}
+.body h2::after{content:""; display:block; width:30px; height:2.5px; background:var(--gold); border-radius:2px; margin-top:12px; opacity:.85}
+.body ul{margin:20px 0 0; padding:0; list-style:none}
+.body li{position:relative; padding-left:26px; margin-top:12px; font-size:15px; color:var(--text-2)}
+.body li::before{content:""; position:absolute; left:2px; top:.72em; width:9px; height:9px; border-radius:50%; background:var(--gold)}
+.pull{margin:40px 0 0; padding:0 8px; font-family:var(--script); font-weight:600; font-size:clamp(1.45rem, 2.6vw, 1.8rem); line-height:1.45; color:var(--gold); text-align:center}
+.pull small{display:block; margin-top:10px; font-family:var(--sans); font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted-2)}
+.cta-box{margin-top:52px; background:linear-gradient(165deg, var(--card-a), var(--card-b)); border:1px solid rgba(242,179,61,.35); border-radius:16px; padding:clamp(24px, 3.4vw, 34px)}
+.cta-box h3{font-size:1.15rem; color:var(--text-hi); font-weight:700; line-height:1.4}
+.cta-box p{margin-top:10px; font-size:13.5px; color:var(--muted)}
+.btn{display:inline-flex; align-items:center; gap:9px; margin-top:18px; background:linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%); color:#14233C; font-size:12.5px; font-weight:700; padding:12px 24px; border-radius:999px; transition:transform .22s, box-shadow .22s}
+.btn:hover{transform:translateY(-2px); box-shadow:0 12px 28px rgba(242,179,61,.25)}
+.btn svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.more{margin-top:56px; padding-top:26px; border-top:1px solid rgba(146,178,214,.14)}
+.more h4{margin:0; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted-2); font-weight:700}
+.more a{display:inline-flex; align-items:center; gap:8px; margin-top:14px; margin-right:26px; font-size:13.5px; font-weight:600; color:var(--text-2); transition:color .2s}
+.more a:hover{color:var(--gold)}
+.more svg{width:13px; height:13px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+footer{margin-top:60px; padding:26px 0 36px; border-top:1px solid rgba(146,178,214,.12); text-align:center}
+footer p{font-size:11px; letter-spacing:.06em; color:var(--muted-2)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a href="../index.html" class="back">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+      Back to the site
+    </a>
+    <a href="../index.html" class="wordmark">
+      <img src="../images/logo-emblem.png" alt="">
+      <span><b>BDG</b><small>BILLY DATA GENIUS</small></span>
+    </a>
+  </div>
+</header>
+
+<article>
+  <div class="kicker"><span>Growth of a Data Scientist</span><span class="date">Oct 14, 2026 · 5 min read</span></div>
+  <h1>From Classroom to Code: What 14 Years of Teaching Taught Me About Data</h1>
+  <p class="byline">By <b>Blessing "Billy" Bhobho</b> — Founder, Billy Data Genius · Nelspruit, Mpumalanga</p>
+  <div class="rule" role="presentation"></div>
+
+  <p class="lede">People imagine data science as a room of machines and equations. In practice, it's a room full of people who need a complicated thing explained before Friday. Which is to say: it's a classroom.</p>
+
+  <div class="body">
+    <h2>Seven schools, one syllabus: clarity</h2>
+    <p>Between 2011 and today I taught in seven schools across Mpumalanga — Accounting, Business Studies, Computer Applications Technology, English, EMS, Mathematical Literacy. I carried marksheets in Naas, discipline files in Witbank, timetables in Hazyview, HOD folders in Dwasloorp. Different buildings, same lesson: the person who can explain complexity simply becomes the most useful person in the building.</p>
+    <p>That's the skill my clients actually hire. TensorFlow can find a pattern; only a human can make a principal, an owner or a manager <b>believe</b> it — and believe it in the two minutes they have.</p>
+    <p class="pull">"A model is only as persuasive<br>as the sentence that sells its insight."<small>— fourteen classrooms of field-testing</small></p>
+
+    <h2>What an HOD knows about governance</h2>
+    <p>Being a Head of Department and chairing committees taught me the unglamorous half of data work: structure. Marks must be moderated. Records must be kept in one trusted place. Processes must survive the day you're sick. Strip the school vocabulary and you're describing data governance — reproducible pipelines, versioned numbers, one source of truth. I got twenty years of practice before my first SQL join.</p>
+
+    <h2>Never actually left the classroom</h2>
+    <p>While teaching full-time, I kept enrolling myself:</p>
+    <ul>
+      <li>Jovian — <i>Data Analysis with Python, Zero to Pandas</i></li>
+      <li>UniAthen — Executive Diploma in Data Analytics + Microsoft Power BI diploma</li>
+      <li>Cambridge PGDDSC — completed with Distinctions (2024)</li>
+      <li>WorldQuant University Applied Data Science Lab — Distinctions (2026); Computer Vision Lab in progress; Applied AI Fundamentals next</li>
+      <li>Stadio — Advanced Diploma in Technical and Vocational Teaching (2025– ), because the teacher in me still wants the formal craft</li>
+    </ul>
+    <p>I call it being the student of my own course. It also means every tool I bring a client — Pandas, scikit-learn, TensorFlow, PyTorch, Power BI — arrives with an owner who can explain it in plain language and stand behind it.</p>
+
+    <h2>Why people-first data wins here</h2>
+    <p>Mpumalanga taught me something the textbooks won't: insight without trust is decoration. The shops, schools and clinics around Kabokweni and Nelspruit don't adopt data because a dashboard exists; they adopt it because someone walked them through it, in their language, patiently, twice. That patience is not soft skill decoration — it's the delivery mechanism of every insight I've ever sold or shared.</p>
+    <p>When I built the SATMED Health Care website for a real practice here at home, the technology took days. What made it work was knowing the patients: big buttons for calling, hours where people actually look, locations named the way locals say them. Data of people, for people.</p>
+
+    <p>The classroom is widening, but the job has never changed: take what's complicated, hand back something plain enough to act on by Monday.</p>
+  </div>
+
+  <div class="cta-box">
+    <h3>Bring the complicated thing.</h3>
+    <p>A mess of spreadsheets, a dashboard nobody opens, a website that whispers — I'll meet you where the confusion is.</p>
+    <a href="../index.html#contact" class="btn">Start a conversation
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+
+  <div class="more">
+    <h4>More from the blog</h4>
+    <a href="data-into-solutions.html"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0M12 7h.01M11 11h1v5h1"/></svg>Why I Built Billy Data Genius — the founder's story</a>
+    <a href="data-is-a-language.html"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14.5 14.5 0 0 1 0 18 14.5 14.5 0 0 1 0-18"/></svg>Data Is a Language — and your business already speaks it</a>
+  </div>
+</article>
+
+<footer>
+  <p>© 2026 Billy Data Genius — Data. Insights. Impact.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billy Data Genius — Turning Data Into Real-World Solutions</title>
+<meta name="description" content="BDG is a data sciences agency helping businesses, educators and organisations unlock the power of data, build smarter strategies and create lasting impact.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* ================= tokens ================= */
+:root{
+  --navy-950:#050D1A;          /* deepest section bg */
+  --navy-900:#081524;          /* header */
+  --navy-800:#0A1729;          /* hero base */
+  --navy-750:#0A1626;          /* about text panel */
+  --card-a:#0B1A2E;            /* card gradient top */
+  --card-b:#071120;            /* card gradient bottom */
+  --ink:#14294B;               /* headings on light */
+  --gold:#F2B33D;
+  --gold-hi:#F7C155;
+  --gold-deep:#D99A26;
+  --text-hi:#F4F8FD;
+  --text-2:#C9D7E9;
+  --muted:#97A9C0;
+  --muted-2:#7B8CA6;
+  --light-bg:#F3F4F8;
+  --body-light:#5B6C86;
+  --blue:#5AA9FF;
+  --green:#37D690;
+  --purple:#8B6FF7;
+  --pink:#F45FA2;
+  --skyline:#8FBFE8;
+  --container:1240px;
+  --pad-y:clamp(64px, 8.4vw, 104px);
+  --header-h:74px;
+  --radius-card:14px;
+  --shadow-card:0 18px 44px rgba(0,0,0,.42);
+  --sans:"Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script:"Caveat", "Segoe Script", cursive;
+}
+
+/* ================= base ================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 16px)}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0; background:var(--navy-950); color:var(--text-hi);
+  font-family:var(--sans); font-size:16px; line-height:1.7;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+img{max-width:100%; display:block}
+a{color:inherit; text-decoration:none}
+button{font:inherit; background:none; border:0; cursor:pointer; color:inherit}
+h1,h2,h3,p{margin:0}
+.gold-text{color:var(--gold)}
+.wrap{width:min(var(--container), 100% - clamp(40px, 6.4vw, 72px)); margin-inline:auto}
+::selection{background:var(--gold); color:#14233C}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:4px}
+
+.eyebrow{
+  font-size:11px; font-weight:700; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--muted); margin:0
+}
+.eyebrow.gold{color:var(--gold)}
+
+/* reveal on scroll */
+.js .reveal{opacity:0; transform:translateY(18px);
+  transition:opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1)}
+.js .reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){ .js .reveal{opacity:1; transform:none; transition:none} }
+
+/* ================= buttons ================= */
+.btn{
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:13px; font-weight:600; letter-spacing:.02em;
+  padding:13px 26px; border-radius:999px; transition:.22s;
+}
+.btn .arr{width:15px; height:15px; stroke:currentColor; stroke-width:2; fill:none;
+  stroke-linecap:round; stroke-linejoin:round; transition:transform .22s}
+.btn:hover .arr{transform:translateX(4px)}
+.btn-gold{background:var(--gold); color:#152238; font-weight:700}
+.btn-gold:hover{background:var(--gold-hi); transform:translateY(-2px)}
+.btn-outline-gold{border:1.5px solid var(--gold); color:var(--gold)}
+.btn-outline-gold:hover{background:var(--gold); color:#152238}
+.btn-outline-navy{border:1.5px solid rgba(20,41,75,.55); color:var(--ink)}
+.btn-outline-navy:hover{border-color:var(--ink); background:rgba(20,41,75,.06)}
+
+/* ================= header ================= */
+.site-header{
+  position:fixed; inset:0 0 auto; z-index:60; height:var(--header-h);
+  background:rgba(8,21,36,.55); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent; transition:.3s;
+}
+.site-header.solid{background:rgba(6,14,26,.92); border-bottom-color:rgba(146,178,214,.1)}
+.header-inner{height:var(--header-h); display:flex; align-items:center; justify-content:space-between; gap:24px}
+.brand{display:flex; align-items:center; gap:13px; flex-shrink:0}
+.brand img{height:46px; width:auto}
+.brand-bdg{font-size:24px; font-weight:800; letter-spacing:.02em; color:var(--gold); line-height:1}
+.brand-lines{display:flex; flex-direction:column; gap:3px; border-left:1px solid rgba(242,179,61,.4); padding-left:13px}
+.brand-lines b{font-size:13px; font-weight:700; letter-spacing:.08em; color:var(--text-hi); white-space:nowrap}
+.brand-lines span{font-size:8.5px; font-weight:500; letter-spacing:.34em; color:var(--muted); white-space:nowrap}
+.main-nav{display:flex; gap:clamp(18px, 2.4vw, 34px); align-items:center}
+.main-nav a{
+  font-size:13px; font-weight:500; color:var(--text-2); padding:6px 2px;
+  border-bottom:2px solid transparent; transition:.2s;
+}
+.main-nav a:hover{color:#fff}
+.main-nav a.active{color:var(--gold); font-weight:600; border-bottom-color:var(--gold)}
+.header-cta{flex-shrink:0}
+.nav-toggle{display:none; width:42px; height:42px; border-radius:10px; border:1px solid rgba(146,178,214,.25);
+  align-items:center; justify-content:center}
+.nav-toggle .bars, .nav-toggle .bars::before, .nav-toggle .bars::after{
+  content:""; display:block; width:18px; height:2px; background:var(--text-hi); border-radius:2px; position:relative;
+}
+.nav-toggle .bars::before{position:absolute; top:-6px}
+.nav-toggle .bars::after{position:absolute; top:6px}
+.mobile-nav{
+  display:none; position:fixed; top:var(--header-h); left:0; right:0; z-index:59;
+  background:rgba(6,14,26,.97); border-top:1px solid rgba(146,178,214,.12);
+  padding:10px 24px 22px; backdrop-filter:blur(10px);
+}
+.mobile-nav.open{display:flex; flex-direction:column}
+.mobile-nav a{padding:13px 4px; font-size:14px; font-weight:500; color:var(--text-2); border-bottom:1px solid rgba(146,178,214,.08)}
+.mobile-nav a.active{color:var(--gold)}
+
+/* ================= hero ================= */
+.hero{
+  position:relative; min-height:clamp(580px, 76vh, 740px);
+  display:flex; align-items:center; overflow:hidden; background:var(--navy-800);
+}
+.hero-media{
+  position:absolute; inset:0;
+  background:url("images/hero-vision.jpg") no-repeat;
+  background-size:cover; background-position:center 42%;
+}
+.hero-grad{
+  position:absolute; inset:0; background:
+    linear-gradient(90deg, var(--navy-800) 0%, rgba(10,23,41,.985) 26%, rgba(10,23,41,.8) 42%, rgba(10,23,41,.28) 60%, rgba(9,19,34,.05) 78%),
+    linear-gradient(180deg, rgba(6,14,26,.6) 0%, rgba(6,14,26,0) 18%, rgba(6,14,26,0) 76%, rgba(5,13,26,.9) 100%);
+}
+.hero-inner{position:relative; padding-top:calc(var(--header-h) + 26px); padding-bottom:56px}
+.hero-copy{max-width:590px}
+.hero-eyebrow{font-size:13px; font-weight:700; letter-spacing:.32em; text-transform:uppercase; color:var(--gold); line-height:2}
+.hero-eyebrow span{display:block; font-size:14.5px}
+.hero h1{
+  margin-top:20px;
+  font-size:clamp(2.55rem, 4.7vw, 4.05rem); font-weight:700; line-height:1.12;
+  letter-spacing:-.01em; color:#fff; text-wrap:balance;
+}
+.hero .lede{
+  margin-top:24px; font-size:15px; line-height:1.85;
+  color:#DCE6F2; max-width:47ch;
+}
+.hero-actions{margin-top:36px; display:flex; align-items:center; gap:28px; flex-wrap:wrap}
+.play-link{display:inline-flex; align-items:center; gap:12px; font-size:13.5px; font-weight:600; color:#fff}
+.play-circle{
+  width:36px; height:36px; border-radius:50%; border:1.5px solid rgba(255,255,255,.75);
+  display:inline-flex; align-items:center; justify-content:center; transition:.22s; flex-shrink:0;
+}
+.play-circle svg{width:11px; height:11px; fill:#fff; margin-left:2px}
+.play-link:hover .play-circle{background:rgba(255,255,255,.16); border-color:#fff}
+
+/* ================= services ================= */
+.services{background:var(--navy-950); padding:var(--pad-y) 0}
+.services-inner{display:grid; grid-template-columns:200px 1fr; gap:clamp(26px, 3.4vw, 52px)}
+.service-rail{position:relative; padding-right:30px}
+.service-rail::after{
+  content:""; position:absolute; top:4px; bottom:4px; right:0; width:1.5px;
+  background:linear-gradient(180deg, var(--gold), rgba(242,179,61,.12));
+}
+.rail-title{
+  margin-top:20px;
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-size:clamp(2.5rem, 3.4vw, 3.45rem); font-weight:800; line-height:1;
+  letter-spacing:.3em; text-transform:uppercase; color:#fff;
+}
+.cards{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:16px}
+.card{
+  --ac:var(--blue); --ac-soft:rgba(90,169,255,.5);
+  display:flex; flex-direction:column;
+  background:linear-gradient(165deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(146,178,214,.14); border-radius:var(--radius-card);
+  padding:0; overflow:hidden; min-height:296px;
+  transition:transform .3s, border-color .3s, box-shadow .3s;
+}
+.card-art{height:148px; flex:none}
+.card-art img{width:100%; height:100%; object-fit:cover; object-position:center 42%; display:block}
+.card-body{display:flex; flex-direction:column; flex:1; padding:20px 20px 22px}
+.card:hover{transform:translateY(-5px); border-color:var(--ac-soft); box-shadow:var(--shadow-card)}
+.card-icon{width:34px; height:34px; color:var(--ac); margin-bottom:18px}
+.card-icon svg{width:100%; height:100%; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+.card-icon svg .fill{fill:currentColor; stroke:none}
+.card h3{font-size:15.5px; font-weight:600; line-height:1.4; color:var(--text-hi)}
+.card p{margin-top:12px; font-size:12.5px; line-height:1.75; color:var(--muted); margin-bottom:auto}
+.card .learn{
+  margin-top:20px; display:inline-flex; align-items:center; gap:7px;
+  font-size:12px; font-weight:600; color:var(--ac);
+}
+.card .learn svg{width:14px; height:14px; stroke:currentColor; stroke-width:2; fill:none;
+  stroke-linecap:round; stroke-linejoin:round; transition:transform .22s}
+.card .learn:hover svg{transform:translateX(4px)}
+
+/* ================= about band ================= */
+.about-band{
+  display:grid; grid-template-columns:29fr 40fr 28fr 56px;
+  min-height:480px; background:var(--navy-750);
+}
+.panel{position:relative; overflow:hidden}
+.panel > img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.panel-1 > img{object-position:55% 62%}
+.panel-1::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(200deg, rgba(10,22,38,.15) 40%, rgba(6,14,26,.72) 100%)}
+.band-caption{
+  position:absolute; left:11%; bottom:10%; z-index:2;
+  font-size:clamp(18px, 1.75vw, 23px); font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:#fff; line-height:1.55; white-space:nowrap;
+}
+.panel-3{background:var(--navy-800)}
+.panel-3 .img-wrap img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:right 58%}
+.panel-3::after{content:""; position:absolute; inset:0;
+  background:linear-gradient(270deg, rgba(6,14,26,.72) 0%, rgba(6,14,26,.25) 34%, transparent 55%)}
+.ambition{
+  position:absolute; top:13%; right:9%; z-index:2; text-align:right;
+  font-size:13.5px; font-weight:700; letter-spacing:.24em; text-transform:uppercase;
+  color:#fff; line-height:2.15;
+}
+.ambition::after{content:""; display:inline-block; width:30px; height:3px; background:var(--gold); margin-left:2px}
+.about-panel{display:flex; flex-direction:column; justify-content:center; padding:clamp(34px, 3.6vw, 50px) clamp(26px, 2.8vw, 40px)}
+.about-panel h2{
+  margin-top:16px; font-size:clamp(1.7rem, 2.65vw, 2.35rem);
+  font-weight:700; line-height:1.22; color:#fff;
+}
+.about-panel h2 .gold-text{font-weight:700}
+.about-panel .about-copy{
+  margin-top:18px; font-size:13.5px; line-height:1.9; color:#B9C9DE; max-width:50ch;
+}
+.stats{display:flex; gap:12px; margin-top:26px; flex-wrap:wrap}
+.stat{display:flex; align-items:center; gap:8px}
+.stat-ico{
+  width:26px; height:26px; border-radius:50%; border:1.4px solid var(--gold);
+  display:inline-flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0;
+}
+.stat-ico svg{width:12px; height:12px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round}
+.stat b{display:block; font-size:15.5px; font-weight:700; color:#fff; line-height:1.25; white-space:nowrap}
+.stat small{display:block; font-size:9.5px; font-weight:500; color:var(--muted); letter-spacing:.03em; white-space:nowrap}
+.about-panel .btn-outline-gold{align-self:flex-start; margin-top:28px; font-size:12.5px; padding:11px 22px}
+.script-strip{background:var(--navy-750); display:flex; align-items:center; justify-content:center}
+.script-strip span{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--script); font-size:clamp(1.35rem, 1.55vw, 1.6rem); font-weight:600;
+  color:var(--gold); letter-spacing:.05em; white-space:nowrap;
+}
+
+/* ================= vision & mission ================= */
+.vm{position:relative; overflow:hidden; background:var(--navy-950)}
+.vm::before{content:""; position:absolute; width:780px; height:460px; left:50%; top:-26%; transform:translateX(-50%);
+  background:radial-gradient(closest-side, rgba(242,179,61,.09), transparent 70%); pointer-events:none}
+.vm::after{content:""; position:absolute; width:520px; height:380px; right:-8%; bottom:-30%;
+  background:radial-gradient(closest-side, rgba(90,169,255,.07), transparent 72%); pointer-events:none}
+.vm-inner{position:relative; z-index:1}
+.vm-head{text-align:center; max-width:52ch; margin:0 auto clamp(30px, 3.6vw, 46px)}
+.vm-head h2{margin-top:14px; font-size:clamp(1.85rem, 2.9vw, 2.6rem); font-weight:700; line-height:1.18; color:#fff}
+.vm-head .vm-sub{margin-top:16px; font-size:13.5px; line-height:1.85; color:#B9C9DE}
+.vm-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px}
+.vm-card{
+  --ac:var(--gold); --ac-soft:rgba(242,179,61,.45);
+  position:relative;
+  background:linear-gradient(165deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(146,178,214,.14); border-radius:var(--radius-card);
+  padding:clamp(30px, 3.2vw, 40px) clamp(24px, 3vw, 38px);
+  transition:transform .3s, border-color .3s, box-shadow .3s;
+}
+.vm-card::before{content:""; position:absolute; top:0; left:16%; right:16%; height:2.5px;
+  background:linear-gradient(90deg, transparent, var(--ac), transparent)}
+.vm-card:hover{transform:translateY(-5px); border-color:var(--ac-soft); box-shadow:var(--shadow-card)}
+.vm-ico{
+  width:46px; height:46px; border-radius:12px; color:var(--ac);
+  display:inline-flex; align-items:center; justify-content:center;
+  background:linear-gradient(165deg, var(--ac-soft), transparent 140%);
+  border:1px solid var(--ac-soft); margin-bottom:20px;
+}
+.vm-ico svg{width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
+.vm-ico svg .fill{fill:currentColor; stroke:none}
+.vm-card h3{font-size:clamp(19px, 1.75vw, 22px); font-weight:700; color:var(--text-hi)}
+.vm-card h3::after{content:""; display:block; width:26px; height:2.5px; background:var(--ac); border-radius:2px; margin-top:12px}
+.vm-card .vm-copy{margin-top:18px; font-size:13.5px; line-height:1.9; color:#B9C9DE}
+.vm-quote{
+  margin:clamp(24px, 2.8vw, 38px) auto 0;
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  font-family:var(--script); font-weight:600;
+  font-size:clamp(1.4rem, 2vw, 1.7rem); letter-spacing:.04em;
+  color:var(--gold);
+}
+.vm-quote::before, .vm-quote::after{
+  content:""; width:34px; height:1.5px; flex:none;
+  background:linear-gradient(90deg, transparent, rgba(242,179,61,.75));
+}
+.vm-quote::after{background:linear-gradient(270deg, transparent, rgba(242,179,61,.75))}
+
+/* ================= technologies ================= */
+.tech{
+  position:relative; overflow:hidden;
+  background:linear-gradient(112deg, #0D2C50 0%, #0A2141 34%, #081A30 58%, #050D18 100%);
+}
+.tech::before{
+  content:""; position:absolute; width:880px; height:540px; left:10%; top:-22%;
+  background:radial-gradient(closest-side, rgba(64,140,214,.26), transparent 72%); pointer-events:none;
+}
+.tech-waves{position:absolute; inset:0; opacity:.55; pointer-events:none}
+.tech-inner{position:relative; display:grid; grid-template-columns:minmax(280px, 330px) 1fr; align-items:center; padding-right:min(clamp(250px, 24vw, 350px), 27%)}
+.tech-eyebrow{color:var(--skyline)}
+.tech-copy{padding:clamp(56px, 6.8vw, 88px) clamp(26px, 3.4vw, 52px) clamp(56px, 6.8vw, 88px) 0}
+.tech h2{margin-top:14px; font-size:clamp(1.85rem, 2.9vw, 2.6rem); font-weight:700; line-height:1.18; color:#fff}
+.tech .tech-sub{margin-top:16px; font-size:13.5px; line-height:1.85; color:#A9BDD8; max-width:38ch}
+.tech .btn{margin-top:30px}
+.btn-tech{border:1.5px solid rgba(143,191,232,.65); color:#D9E9F8}
+.btn-tech:hover{background:rgba(143,191,232,.14)}
+.chips{display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:14px; align-self:center; max-width:600px; margin:clamp(40px,5vw,64px) clamp(20px,3vw,44px)}
+.chip{
+  background:rgba(16,35,60,.66); border:1px solid rgba(127,182,234,.28); border-radius:14px;
+  padding:16px 8px 12px; text-align:center; backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  transition:transform .25s, border-color .25s, box-shadow .25s;
+}
+.chip:hover{transform:translateY(-4px); border-color:rgba(242,179,61,.6); box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.chip svg{width:30px; height:30px; margin:0 auto 9px}
+.chip span{display:block; font-size:11px; font-weight:500; color:#C9DAEC; line-height:1.3}
+.tech-image{position:absolute; top:0; right:0; bottom:0; width:min(clamp(230px, 21.5vw, 320px), 25%); z-index:1; overflow:hidden}
+.tech-image img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+.tech-image::before{content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(90deg, #081A30 0%, rgba(8,26,48,.3) 26%, transparent 52%)}
+
+/* ================= featured work (light) ================= */
+.work{background:var(--light-bg); color:var(--ink); padding:clamp(64px, 8vw, 96px) 0}
+.work-inner{display:grid; grid-template-columns:minmax(250px, 300px) 1fr; gap:clamp(30px, 4.6vw, 62px); align-items:center}
+.work .eyebrow{color:var(--ink)}
+.work h2{margin-top:14px; font-size:clamp(1.85rem, 2.9vw, 2.5rem); font-weight:700; line-height:1.22}
+.work .work-sub{margin-top:14px; font-size:13.5px; line-height:1.85; color:var(--body-light); max-width:34ch}
+.work .btn{margin-top:26px; padding:11px 22px; font-size:12.5px}
+.carousel{position:relative; min-width:0}
+.car-viewport{
+  overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none;
+  padding-bottom:4px;
+}
+.car-viewport::-webkit-scrollbar{display:none}
+.car-track{display:grid; grid-auto-flow:column; grid-auto-columns:calc((100% - 48px)/3); gap:24px}
+.work-card{scroll-snap-align:start}
+.work-thumb{aspect-ratio:1200/640; border-radius:12px; overflow:hidden;
+  box-shadow:0 14px 34px rgba(15,37,71,.14); transition:transform .3s, box-shadow .3s}
+.work-card:hover .work-thumb{transform:translateY(-4px); box-shadow:0 20px 44px rgba(15,37,71,.2)}
+.work-thumb img{width:100%; height:100%; object-fit:cover}
+.work-card h3{margin-top:16px; font-size:15px; font-weight:700; color:#142B50}
+.work-card p{margin-top:5px; font-size:12.5px; line-height:1.65; color:#64748B; max-width:30ch}
+.car-arrows{position:absolute; right:-12px; top:38%; display:flex; flex-direction:column; gap:10px}
+.car-btn{
+  width:40px; height:40px; border-radius:50%; background:#fff;
+  display:inline-flex; align-items:center; justify-content:center; transition:.22s;
+}
+.car-btn svg{width:15px; height:15px; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.car-prev{border:1.5px solid rgba(20,41,75,.22); color:#5D6B84}
+.car-prev:hover:not([disabled]){border-color:rgba(20,41,75,.55)}
+.car-next{border:1.5px solid var(--gold); color:var(--gold-deep)}
+.car-btn:hover:not([disabled]){transform:scale(1.06)}
+.car-btn[disabled]{opacity:.45; cursor:default}
+.car-dots{display:flex; justify-content:center; gap:8px; margin-top:20px}
+.car-dots button{width:7px; height:7px; border-radius:50%; background:#C9CFDA; transition:.22s}
+.car-dots button.active{background:var(--ink); transform:scale(1.25)}
+
+/* ============ portfolio of evidence spotlight ============ */
+.spotlight{display:grid; grid-template-columns:1.12fr .88fr; gap:clamp(28px, 3.6vw, 52px); align-items:center;
+  margin-top:clamp(42px, 5.4vw, 72px); padding-top:clamp(30px, 3.4vw, 48px); border-top:1.5px solid rgba(20,41,75,.14)}
+.spot-board img{width:100%; height:auto; border-radius:12px; box-shadow:0 18px 44px rgba(15,37,71,.18); display:block}
+.spot-copy h3{margin-top:12px; font-size:clamp(1.3rem, 1.95vw, 1.7rem); font-weight:700; line-height:1.3; color:#142B50}
+.spot-list{margin:18px 0 0; padding:0; list-style:none}
+.spot-list li{position:relative; padding-left:24px; margin-top:10px; font-size:13px; line-height:1.7; color:#45566F}
+.spot-list li::before{content:""; position:absolute; left:2px; top:.52em; width:11px; height:11px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #F7C155, var(--gold-deep))}
+.spot-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:22px}
+.spot-tags span{font-size:10.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:#142B50;
+  border:1.4px solid rgba(20,41,75,.22); border-radius:999px; padding:6px 13px; background:#fff}
+.spot-credit{margin-top:18px; font-size:11.5px; line-height:1.65; color:#64748B; letter-spacing:.02em}
+.spot-credit b{color:#142B50; font-weight:700}
+
+/* ================= blog ================= */
+.blog{background:var(--navy-950); padding:var(--pad-y) 0}
+.blog-inner{display:grid; grid-template-columns:minmax(220px, 280px) 1fr; gap:clamp(26px, 3.4vw, 52px)}
+.blog-head{position:relative; padding-right:30px}
+.blog-head::after{content:""; position:absolute; top:4px; bottom:4px; right:0; width:1.5px;
+  background:linear-gradient(180deg, var(--gold), rgba(242,179,61,.12))}
+.blog-head h2{margin-top:16px; font-size:clamp(1.85rem, 2.9vw, 2.5rem); font-weight:700; line-height:1.2; color:#fff}
+.blog-head .blog-sub{margin-top:16px; font-size:13px; line-height:1.8; color:#A9BDD8; max-width:26ch}
+.blog-grid{display:grid; grid-template-columns:1fr 1.55fr; gap:16px}
+.post-card{
+  display:flex; flex-direction:column;
+  background:linear-gradient(165deg, var(--card-a) 0%, var(--card-b) 100%);
+  border:1px solid rgba(146,178,214,.14); border-radius:var(--radius-card);
+  padding:28px 26px; transition:transform .3s, border-color .3s, box-shadow .3s;
+}
+.post-card:hover{transform:translateY(-5px); border-color:rgba(242,179,61,.45); box-shadow:var(--shadow-card)}
+.post-featured{grid-row:span 2; padding:0; overflow:hidden}
+.post-img{margin:0; height:230px; overflow:hidden; border-bottom:1px solid rgba(146,178,214,.14); flex:none}
+.post-img img{width:100%; height:100%; object-fit:cover; object-position:50% 50%; display:block; transition:transform .55s ease}
+.post-featured:hover .post-img img{transform:scale(1.05)}
+.post-body{display:flex; flex-direction:column; flex:1; padding:22px 26px 26px}
+.post-meta{display:flex; align-items:center; gap:10px; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase}
+.post-tag{color:var(--gold); font-weight:700}
+.post-dot{width:3px; height:3px; border-radius:50%; background:var(--muted-2); flex:none}
+.post-date{color:var(--muted-2)}
+.post-featured h3{margin-top:20px; font-size:clamp(1.5rem, 2.2vw, 1.95rem); font-weight:700; line-height:1.28; color:var(--text-hi)}
+.post-card:not(.post-featured) h3{margin-top:16px; font-size:15.5px; font-weight:600; line-height:1.45; color:var(--text-hi)}
+.post-ex{margin-top:14px; font-size:12.5px; line-height:1.8; color:var(--muted)}
+.post-featured .post-ex{font-size:13.5px; max-width:52ch}
+.post-read{margin-top:auto; padding-top:22px; display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:var(--gold)}
+.post-read svg{width:14px; height:14px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; transition:transform .22s}
+.post-card:hover .post-read svg{transform:translateX(4px)}
+
+/* ================= CTA ================= */
+.cta{position:relative; overflow:hidden; min-height:216px; display:flex; align-items:center; background:#081220}
+.cta-media{position:absolute; inset:0; background:url("images/cta-mountain.jpg") no-repeat center 58%; background-size:cover}
+.cta::before{content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(88deg, rgba(6,14,26,.95) 6%, rgba(6,14,26,.62) 42%, rgba(6,14,26,.15) 78%)}
+.cta-inner{position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:36px; width:min(var(--container), 100% - clamp(40px, 6.4vw, 72px)); margin-inline:auto}
+.cta h2{font-size:clamp(1.3rem, 1.95vw, 1.75rem); font-weight:700; line-height:1.3; color:#fff; max-width:24ch}
+.cta .cta-sub{margin-top:9px; font-size:13.5px; color:#C4D6EA}
+.cta .btn{margin-top:20px; font-size:12.5px; padding:11px 22px}
+
+.contact-chips{display:flex; flex-wrap:wrap; gap:10px 12px; margin:22px 0 0; padding:0; list-style:none; max-width:640px}
+.contact-chips a{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--gold); background:rgba(255,255,255,.05); border:1px solid rgba(255,214,112,.26); padding:9px 14px; border-radius:999px; text-decoration:none; transition:background .25s, border-color .25s, transform .25s}
+.contact-chips a:hover{background:rgba(255,214,112,.12); border-color:rgba(255,214,112,.6); transform:translateY(-1px)}
+.contact-chips svg{width:14px; height:14px; flex:none; color:var(--gold)}
+.contact-chips .chip-label{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.contact-chips .chip-addr{max-width:100%}
+.cta-logo{height:clamp(110px, 10vw, 134px); width:auto; flex-shrink:0}
+.cta .brand-caption{display:none}
+
+/* ================= footer ================= */
+.site-footer{background:#050A14; border-top:1px solid rgba(146,178,214,.09); padding:20px 0}
+.footer-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
+.site-footer small{font-size:11.5px; color:var(--muted-2)}
+.footer-links{display:flex; gap:22px}
+.footer-links a{font-size:11.5px; color:var(--muted-2); transition:.2s}
+.footer-links a:hover{color:var(--gold)}
+
+/* ================= responsive ================= */
+@media (max-width:1180px){
+  .cards{grid-template-columns:repeat(3, minmax(0,1fr))}
+  .card{min-height:0}
+}
+@media (max-width:1240px){
+  .work-inner{grid-template-columns:1fr}
+  .work .btn{margin-top:4px}
+  .car-arrows{right:0}
+}
+@media (max-width:1120px){
+  .about-band{grid-template-columns:1fr 1fr}
+  .about-panel{order:-1; grid-column:1/-1; padding-top:clamp(44px,6vw,64px); padding-bottom:clamp(44px,6vw,64px)}
+  .panel-1{min-height:400px}
+  .panel-3{min-height:400px}
+  .script-strip{grid-column:1/-1; padding:16px}
+  .script-strip span{writing-mode:horizontal-tb; transform:none}
+  .tech-inner{grid-template-columns:minmax(280px, 320px) 1fr; padding-right:0}
+  .tech-image{display:none}
+}
+@media (max-width:940px){
+  .main-nav, .header-cta{display:none}
+  .nav-toggle{display:inline-flex}
+  .services-inner{grid-template-columns:1fr}
+  .service-rail{display:flex; align-items:flex-end; gap:20px; padding-right:0; padding-bottom:16px;
+    border-right:0; border-bottom:1.5px solid rgba(242,179,61,.35)}
+  .service-rail::after{display:none}
+  .rail-title{margin-top:0; font-size:2.5rem; writing-mode:horizontal-tb; transform:none; letter-spacing:.18em}
+  .cards{grid-template-columns:repeat(2, minmax(0,1fr))}
+  .spotlight{grid-template-columns:1fr}
+  .blog-inner{grid-template-columns:1fr}
+  .blog-head::after{display:none}
+  .blog-grid{grid-template-columns:1fr}
+  .post-featured{grid-row:auto}
+  .post-img{height:320px}
+}
+@media (max-width:900px){
+  .tech-inner{grid-template-columns:1fr; padding-right:0}
+  .tech-copy{padding:var(--pad-y) 0 8px}
+  .chips{margin:30px 0 clamp(56px,7vw,84px); max-width:none; grid-template-columns:repeat(auto-fit, minmax(96px,1fr))}
+}
+@media (max-width:764px){
+  .car-track{grid-auto-columns:calc((100% - 24px)/2)}
+  .car-dots{justify-content:flex-start}
+}
+@media (max-width:640px){
+  .hero{min-height:600px}
+  .hero-media{background-position:22% 42%}
+  .hero-actions{gap:20px}
+  .cards{grid-template-columns:1fr}
+  .card{min-height:0}
+  .card-art{height:140px}
+  .vm-grid{grid-template-columns:1fr}
+  .panel-1{min-height:340px}
+  .panel-3{min-height:300px}
+  .about-band{grid-template-columns:1fr}
+  .car-track{grid-auto-columns:88%}
+  .car-arrows{display:none}
+  .cta-inner{flex-direction:column; align-items:flex-start; gap:8px; padding-top:44px; padding-bottom:44px}
+  .cta h2{max-width:none}
+
+  .contact-chips{gap:8px}
+  .contact-chips a{font-size:11.5px; padding:8px 12px}
+  .cta-logo{order:-1; height:96px}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="Billy Data Genius — home">
+      <img src="images/logo-emblem.png" alt="BDG globe emblem">
+      <span class="brand-bdg">BDG</span>
+      <span class="brand-lines">
+        <b>BILLY DATA GENIUS</b>
+        <span>DATA&nbsp;|&nbsp;INSIGHTS&nbsp;|&nbsp;IMPACT</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#top" class="active" data-spy="home">Home</a>
+      <a href="#about" data-spy="about">About</a>
+      <a href="#services" data-spy="services">Services</a>
+      <a href="#work" data-spy="work">Portfolio</a>
+      <a href="#blog" data-spy="blog">Blog</a>
+      <a href="#contact" data-spy="contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-gold header-cta" style="font-size:12.5px; padding:10px 20px">
+      Get a Free Consultation
+      <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
+      <span class="bars"></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#work">Portfolio</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" style="color:var(--gold); font-weight:600">Get a Free Consultation →</a>
+  </nav>
+</header>
+
+<main>
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="home" aria-label="Intro">
+  <div class="hero-media" role="img" aria-label="The Billy Data Genius founder in a BDG hoodie, focused beside a glowing holographic globe of global data networks — Better Data. Smarter Decisions. Bigger Opportunities."></div>
+  <div class="hero-grad"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-copy">
+      <p class="hero-eyebrow reveal">Welcome to <span>Billy Data Genius</span></p>
+      <h1 class="reveal">Turning<br>Data Into<br><span class="gold-text">Real-World<br>Solutions</span></h1>
+      <p class="lede reveal">We are a data sciences agency helping businesses, educators and organisations
+        unlock the power of data, build smarter strategies and create lasting impact.</p>
+      <div class="hero-actions reveal">
+        <a href="#services" class="btn btn-gold">
+          Explore Our Services
+          <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#about" class="play-link">
+          <span class="play-circle"><svg viewBox="0 0 12 12"><path d="M2.5 1.2 10.2 6 2.5 10.8z"/></svg></span>
+          Watch Our Story
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services" id="services" aria-label="Our services">
+  <div class="wrap services-inner">
+    <div class="service-rail reveal">
+      <p class="eyebrow gold">Our</p>
+      <h2 class="rail-title">Services</h2>
+    </div>
+    <div class="cards">
+      <article class="card reveal" style="--ac:#5AA9FF; --ac-soft:rgba(90,169,255,.55)">
+        <div class="card-art" aria-hidden="true"><img src="images/services-art-1.jpg" alt=""></div>
+        <div class="card-body">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4.5 19v-4.2M9.5 19V10M14.5 19v-6.4M19.5 19V6"/></svg>
+        </span>
+        <h3>Data Sciences & Analytics</h3>
+        <p>Turn raw data into meaningful insights and predictive solutions.</p>
+        <a class="learn" href="#work">Learn More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#F2B33D; --ac-soft:rgba(242,179,61,.55)">
+        <div class="card-art" aria-hidden="true"><img src="images/services-art-2.jpg" alt=""></div>
+        <div class="card-body">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 10.5h3.4L16 5.2v13.6l-8.6-5.3H4z"/><path d="M7.4 13.5l1.5 4.7a1.2 1.2 0 0 1-1.15 1.55c-.55 0-1-.35-1.15-.9L5.5 14"/><path d="M18.8 9.2a5 5 0 0 1 0 5.6"/></svg>
+        </span>
+        <h3>Digital Marketing</h3>
+        <p>Data-driven strategies to grow your brand and reach the right audience.</p>
+        <a class="learn" href="#work">Learn More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#37D690; --ac-soft:rgba(55,214,144,.55)">
+        <div class="card-art" aria-hidden="true"><img src="images/services-art-3.jpg" alt=""></div>
+        <div class="card-body">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8.6 7.5 4.8 12l3.8 4.5M15.4 7.5l3.8 4.5-3.8 4.5M13.4 5.8l-2.8 12.4"/></svg>
+        </span>
+        <h3>Web Development</h3>
+        <p>Modern, fast and responsive websites that perform.</p>
+        <a class="learn" href="#work">Learn More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#8B6FF7; --ac-soft:rgba(139,111,247,.55)">
+        <div class="card-art" aria-hidden="true"><img src="images/services-art-4.jpg" alt=""></div>
+        <div class="card-body">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.6"/><circle cx="12" cy="12" r="3.2"/><circle class="fill" cx="12" cy="12" r=".9"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2" opacity=".45"/></svg>
+        </span>
+        <h3>Brand Strategy</h3>
+        <p>Build a strong brand that stands out and creates value.</p>
+        <a class="learn" href="#work">Learn More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="card reveal" style="--ac:#F45FA2; --ac-soft:rgba(244,95,162,.55)">
+        <div class="card-art" aria-hidden="true"><img src="images/services-art-5.jpg" alt=""></div>
+        <div class="card-body">
+        <span class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3.6c-4.8 0-8.4 3.3-8.4 7.7 0 4.5 3.6 7.9 8.4 7.9 1.4 0 2.3-.75 2.3-1.8 0-.8-.5-1.25-1.4-1.95-.65-.5-.95-.95-.95-1.6 0-1 .8-1.7 1.9-1.7h1.9c2.5 0 4.2-1.6 4.2-3.8 0-3.5-4.3-4.75-8-4.75z"/><circle class="fill" cx="8.2" cy="9.3" r="1.05"/><circle class="fill" cx="12.4" cy="7.4" r="1.05"/><circle class="fill" cx="16.4" cy="9.2" r="1.05"/><circle class="fill" cx="7.6" cy="13.7" r="1.05"/></svg>
+        </span>
+        <h3>Graphic Design</h3>
+        <p>Creative visuals that tell your story and inspire action.</p>
+        <a class="learn" href="#work">Learn More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about-band" id="about" aria-label="About BDG">
+  <div class="panel panel-1">
+    <img src="images/about-impact-portrait.jpg" alt="The Billy Data Genius founder at his desk — dual monitors showing data dashboards, warm office lighting and the city skyline behind him">
+    <p class="band-caption">Data<br>People<br>Impact</p>
+  </div>
+  <div class="panel about-panel">
+    <p class="eyebrow gold">About BDG</p>
+    <h2>More Than Data.<br><span class="gold-text">We Build Futures.</span></h2>
+    <p class="about-copy">With 14+ years at the intersection of technology and education, we bring a unique
+      blend of data expertise, digital creativity and real-world experience. From schools to global
+      businesses, we help you make data work for you.</p>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.2"/><path d="M12 7.6v4.4l3 1.8"/></svg></span>
+        <span><b>14+</b><small>Years Experience</small></span>
+      </div>
+      <div class="stat">
+        <span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 8.4 12 4.4l7.5 4v7.2L12 19.6l-7.5-4z"/><path d="M4.5 8.4 12 12.4l7.5-4"/><path d="M12 12.4v7.2"/></svg></span>
+        <span><b>100+</b><small>Projects Delivered</small></span>
+      </div>
+      <div class="stat">
+        <span class="stat-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.8l6.4 2.5v5c0 4.1-2.7 6.8-6.4 8.3-3.7-1.5-6.4-4.2-6.4-8.3v-5z"/><path d="M9.2 11.8l2 2 3.8-4"/></svg></span>
+        <span><b>98%</b><small>Client Satisfaction</small></span>
+      </div>
+    </div>
+    <a href="#work" class="btn btn-outline-gold">
+      Learn More About Us
+      <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
+  <div class="panel panel-3">
+    <div class="img-wrap">
+      <img src="images/about-global-city.jpg" alt="A desk with a laptop overlooking a city skyline and mountains at sunset">
+    </div>
+    <p class="ambition">From<br>Local<br>Businesses<br>To Global<br>Ambitions</p>
+  </div>
+  <div class="panel script-strip" aria-hidden="true">
+    <span>Data has no limits</span>
+  </div>
+</section>
+
+<!-- ===================== VISION & MISSION ===================== -->
+<section class="vm" id="vision" aria-label="Our vision and mission">
+  <div class="wrap vm-inner">
+    <div class="vm-head reveal">
+      <p class="eyebrow gold">Vision & Mission</p>
+      <h2>The Future We're <span class="gold-text">Building</span></h2>
+      <p class="vm-sub">Two promises that steer every project we ship — from classroom to boardroom.</p>
+    </div>
+    <div class="vm-grid">
+      <article class="vm-card reveal" style="--ac:#5AA9FF; --ac-soft:rgba(90,169,255,.45)">
+        <span class="vm-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M2.6 12S6.1 6 12 6s9.4 6 9.4 6-3.5 6-9.4 6-9.4-6-9.4-6z"/><circle cx="12" cy="12" r="3"/><circle class="fill" cx="12" cy="12" r="1"/></svg>
+        </span>
+        <h3>Our Vision</h3>
+        <p class="vm-copy">A future where no dream is limited by a lack of insight — where businesses, schools and
+          communities, from Kabokweni to the world, look at their own data and see a brighter, achievable tomorrow.</p>
+      </article>
+      <article class="vm-card reveal" style="--ac:#F2B33D; --ac-soft:rgba(242,179,61,.45)">
+        <span class="vm-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5.6 21V4"/><path d="M5.6 4.8h12.8l-2.8 3.4 2.8 3.4H5.6"/></svg>
+        </span>
+        <h3>Our Mission</h3>
+        <p class="vm-copy">To turn data into real-world solutions: pairing sharp analytics with creativity and
+          education, so every client we serve — and every learner we mentor — grows smarter and rises further.</p>
+      </article>
+    </div>
+    <p class="vm-quote">From sight to impact</p>
+  </div>
+</section>
+
+<!-- ===================== TECHNOLOGIES ===================== -->
+<section class="tech" aria-label="Technologies we use">
+  <svg class="tech-waves" viewBox="0 0 1200 480" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20 340 C 220 250, 430 400, 700 330 S 1180 180, 1260 260" fill="none" stroke="rgba(84,164,235,.34)" stroke-width="1.3"/>
+    <path d="M-20 380 C 240 290, 450 440, 720 360 S 1190 220, 1260 300" fill="none" stroke="rgba(84,164,235,.2)" stroke-width="1.1"/>
+    <path d="M-20 300 C 200 220, 400 380, 660 310 S 1150 150, 1230 230" fill="none" stroke="rgba(242,179,61,.2)" stroke-width="1.2"/>
+    <path d="M-20 420 C 260 330, 470 470, 740 390 S 1200 260, 1270 330" fill="none" stroke="rgba(84,164,235,.13)" stroke-width="1"/>
+  </svg>
+  <div class="wrap tech-inner">
+    <div class="tech-copy">
+      <p class="eyebrow tech-eyebrow gold">Technologies we use</p>
+      <h2>Powering<br>Possibilities</h2>
+      <p class="tech-sub">We work with industry-leading tools and technologies to deliver scalable,
+        secure and future-ready solutions.</p>
+      <a href="#work" class="btn btn-tech">
+        Our Tech Stack
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="chips reveal">
+      <div class="chip" title="Python">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11.9 3.2c-3.1 0-4.6 1.2-4.6 3v2h4.7v1H5.9c-1.9 0-3.4 1.5-3.4 4.3s1.5 4.2 3.4 4.2h2v-2.9c0-1.9 1.5-3.3 3.4-3.3h4.5c1.7 0 2.9-1.2 2.9-3V6.2c0-1.8-1.6-3-6.3-3z" fill="#4B8BBE"/>
+          <circle cx="10" cy="5.5" r=".72" fill="#fff"/>
+          <path d="M12.1 20.8c3.1 0 4.6-1.2 4.6-3v-2h-4.7v-1h6.1c1.9 0 3.4-1.5 3.4-3.6-.9-1-1.7-1.4-3.4-1.4h-2v2.3c0 1.9-1.5 3.3-3.4 3.3H8.2c-1.7 0-2.9 1.2-2.9 3v1.4c0 1.8 2.1 3 6.8 3z" fill="#FFD43B"/>
+          <circle cx="14" cy="18.4" r=".72" fill="#fff"/>
+        </svg>
+        <span>Python</span>
+      </div>
+      <div class="chip" title="TensorFlow">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.3 3 21 7.3v3.1l-5.7-2.6v12L12.3 21z" fill="#FF8F00"/>
+          <path d="M12.3 3 3.6 7.3v3.1l5.7-2.6v3.2H6.5v3h2.8V21l3-1.2z" fill="#FFA726" opacity=".82"/>
+        </svg>
+        <span>TensorFlow</span>
+      </div>
+      <div class="chip" title="SQL">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="2.6" y="2.6" width="18.8" height="18.8" rx="3.4" fill="#1467C6"/>
+          <text x="12" y="15.9" text-anchor="middle" font-family="Poppins, sans-serif" font-size="7.6" font-weight="700" fill="#fff">SQL</text>
+        </svg>
+        <span>SQL</span>
+      </div>
+      <div class="chip" title="Power BI">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.6" y="12.4" width="4.4" height="8" rx="1" fill="#E6A206"/>
+          <rect x="9.8" y="8.6" width="4.4" height="11.8" rx="1" fill="#F2B807"/>
+          <rect x="16" y="3.6" width="4.4" height="16.8" rx="1" fill="#FBC02D"/>
+        </svg>
+        <span>Power BI</span>
+      </div>
+      <div class="chip" title="React">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g fill="none" stroke="#61DAFB" stroke-width="1.1">
+            <ellipse cx="12" cy="12" rx="9.4" ry="3.6"/>
+            <ellipse cx="12" cy="12" rx="9.4" ry="3.6" transform="rotate(60 12 12)"/>
+            <ellipse cx="12" cy="12" rx="9.4" ry="3.6" transform="rotate(120 12 12)"/>
+          </g>
+          <circle cx="12" cy="12" r="1.7" fill="#61DAFB"/>
+        </svg>
+        <span>React</span>
+      </div>
+      <div class="chip" title="MongoDB">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2.2c-3.2 4-4.7 7.6-2.9 11.7l1.9 3.4v4.5h2v-4.5l1.9-3.4c1.8-4.1.3-7.7-3-11.7z" fill="#3FA037"/>
+          <path d="M12 6.2c-.5 2.4-.6 5.4.2 7.9" stroke="#8BC34A" stroke-width=".9" fill="none"/>
+        </svg>
+        <span>MongoDB</span>
+      </div>
+      <div class="chip" title="Docker">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g fill="#2496ED">
+            <rect x="5" y="9.4" width="2.6" height="2.4" rx=".3"/><rect x="8.2" y="9.4" width="2.6" height="2.4" rx=".3"/>
+            <rect x="11.4" y="9.4" width="2.6" height="2.4" rx=".3"/><rect x="8.2" y="6.4" width="2.6" height="2.4" rx=".3"/>
+            <rect x="11.4" y="6.4" width="2.6" height="2.4" rx=".3"/><rect x="8.2" y="3.4" width="2.6" height="2.4" rx=".3"/>
+            <path d="M3.2 13.4h17.9c0 3.9-3.6 7.2-8.9 7.2-5 0-8.7-2.9-9-7.2z"/>
+            <path d="M21.9 14.2c1-.7 1.9-.3 2.1.4" fill="none" stroke="#2496ED" stroke-width="1.2"/>
+          </g>
+        </svg>
+        <span>Docker</span>
+      </div>
+      <div class="chip" title="AWS">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <text x="12" y="12.6" text-anchor="middle" font-family="Poppins, sans-serif" font-size="8.4" font-weight="700" fill="#FF9900">aws</text>
+          <path d="M5.2 16.2c4.6 3 9.4 3 13.6.6" fill="none" stroke="#FF9900" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M19 15.4l-.4 1.9-1.8-.7" fill="none" stroke="#FF9900" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>AWS</span>
+      </div>
+      <div class="chip" title="Tableau">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g stroke-width="2.1" stroke-linecap="round">
+            <path d="M12 4.2v4.2M9.9 6.3h4.2" stroke="#E8762D"/>
+            <path d="M5.6 9.4v3.4M3.9 11.1h3.4" stroke="#1F5081"/>
+            <path d="M18.4 9.4v3.4M16.7 11.1h3.4" stroke="#7099A6"/>
+            <path d="M8.6 15.6v3.4M6.9 17.3h3.4" stroke="#EB912C"/>
+            <path d="M15.4 15.6v3.4M13.7 17.3h3.4" stroke="#5B879B"/>
+          </g>
+        </svg>
+        <span>Tableau</span>
+      </div>
+      <div class="chip" title="And more">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g fill="none" stroke="#9FD0EF" stroke-width="1.8" stroke-linecap="round"><path d="M12 5.4v13.2M5.4 12h13.2"/></g>
+        </svg>
+        <span>and more…</span>
+      </div>
+    </div>
+  </div>
+  <div class="tech-image">
+    <img src="images/tech-data-network.jpg" alt="A glowing blue data observatory — real data, real solutions">
+  </div>
+</section>
+
+<!-- ===================== FEATURED WORK ===================== -->
+<section class="work" id="work" aria-label="Featured work">
+  <div class="wrap work-inner">
+    <div class="reveal">
+      <p class="eyebrow">Featured Work</p>
+      <h2>Solutions That<br><span class="gold-text">Make an Impact</span></h2>
+      <p class="work-sub">Explore some of our recent projects that showcase how we turn data into
+        meaningful results.</p>
+      <a href="#evidence" class="btn btn-outline-navy">
+        View Our Portfolio
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="carousel reveal">
+      <div class="car-viewport" id="carViewport" tabindex="0" aria-label="Project carousel">
+        <div class="car-track" id="carTrack">
+          <article class="work-card">
+            <div class="work-thumb"><img src="images/work-satmed-site.jpg" alt="SATMED Health Care website — reception hero with logo and navigation"></div>
+            <h3>SATMED Health Care Website</h3>
+            <p>Full 4-page medical site, designed and built end to end.</p>
+          </article>
+          <article class="work-card">
+            <div class="work-thumb"><img src="images/work-school-dashboard.jpg" alt="School analytics dashboard with charts and KPI cards"></div>
+            <h3>School Performance Dashboard</h3>
+            <p>Data visualisation for better education outcomes.</p>
+          </article>
+          <article class="work-card">
+            <div class="work-thumb"><img src="images/work-marketing-campaign.jpg" alt="Digital marketing campaign analytics on a dark interface"></div>
+            <h3>Digital Marketing Campaign</h3>
+            <p>+250% increase in engagement for a client brand.</p>
+          </article>
+          <article class="work-card">
+            <div class="work-thumb"><img src="images/work-ecommerce.jpg" alt="E-commerce website interface with photography grid"></div>
+            <h3>E-commerce Website</h3>
+            <p>Modern, fast and conversion-focused design.</p>
+          </article>
+        </div>
+      </div>
+      <div class="car-arrows">
+        <button class="car-btn car-prev" id="carPrev" aria-label="Previous project">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+        <button class="car-btn car-next" id="carNext" aria-label="Next project">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+      </div>
+      <div class="car-dots" id="carDots" role="tablist" aria-label="Carousel position">
+        <button class="active" aria-label="Go to project 1"></button>
+        <button aria-label="Go to project 2"></button>
+        <button aria-label="Go to project 3"></button>
+        <button aria-label="Go to project 4"></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="spotlight reveal" id="evidence">
+      <div class="spot-board">
+        <img src="images/evidence-satmed-board.jpg" alt="Portfolio of evidence — the four SATMED Health Care pages on desktop, with the home and contact pages shown on mobile">
+      </div>
+      <div class="spot-copy">
+        <p class="eyebrow">Portfolio of Evidence</p>
+        <h3>SATMED Health Care<br><span class="gold-text">4-Page Medical Website</span></h3>
+        <ul class="spot-list">
+          <li>Designed and built the complete site: Home, About, Services and Contact pages.</li>
+          <li>Custom HTML, SCSS-compiled styling and JavaScript interactivity.</li>
+          <li>Appointment and contact funnel wired through a PHP mailer (config.php).</li>
+          <li>Click-to-call phone links, Google Maps embed and medical-aid partner strip.</li>
+          <li>Symptom-checker and lead-doctor profile widgets; patient testimonials and FAQ.</li>
+          <li>Responsive across desktop, tablet and mobile — tested at 414px.</li>
+        </ul>
+        <div class="spot-tags">
+          <span>HTML5</span><span>SCSS</span><span>JavaScript</span><span>PHP</span><span>Responsive</span>
+        </div>
+        <p class="spot-credit">Client build — credited in the SATMED site footer: "Powered by <b>BHOBHO</b>".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BLOG ===================== -->
+<section class="blog" id="blog" aria-label="From the blog">
+  <div class="wrap blog-inner">
+    <div class="blog-head reveal">
+      <p class="eyebrow gold">From the Blog</p>
+      <h2>Data, plainly<br>spoken<span class="gold-text">.</span></h2>
+      <p class="blog-sub">Notes from the desk of Billy Data Genius — where classrooms, code and real businesses meet.</p>
+    </div>
+    <div class="blog-grid">
+      <a class="post-card post-featured reveal" href="blog/data-into-solutions.html">
+        <figure class="post-img">
+          <img src="images/blog-billy-dashboards.jpg" alt="Blessing "Billy" Bhobho, founder of Billy Data Genius, before a wall of live data dashboards" loading="lazy" decoding="async">
+        </figure>
+        <div class="post-body">
+          <div class="post-meta">
+            <span class="post-tag">Founder's Desk</span>
+            <span class="post-dot" aria-hidden="true"></span>
+            <span class="post-date">Oct 28, 2026 · 6 min read</span>
+          </div>
+          <h3>Why I Built Billy Data Genius — Turning Data Into Real-World Solutions</h3>
+          <p class="post-ex">From fourteen years of marksheets across Mpumalanga to WorldQuant distinctions: the story of
+            Billy Data Genius — and why data is just teaching at a bigger scale. Includes the SATMED build as living proof.</p>
+          <span class="post-read">Read the story
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </div>
+      </a>
+      <a class="post-card reveal" href="blog/data-is-a-language.html">
+        <div class="post-meta">
+          <span class="post-tag">Analytics</span>
+          <span class="post-dot" aria-hidden="true"></span>
+          <span class="post-date">Oct 21, 2026 · 5 min read</span>
+        </div>
+        <h3>Data Is a Language — and Your Business Already Speaks It</h3>
+        <p class="post-ex">Your sales book is already telling a story. Three steps any business can take this month to
+          start reading its own numbers — collected from fourteen years of marksheets.</p>
+        <span class="post-read">Read the story
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+      <a class="post-card reveal" href="blog/classroom-to-code.html">
+        <div class="post-meta">
+          <span class="post-tag">Growth of a Data Scientist</span>
+          <span class="post-dot" aria-hidden="true"></span>
+          <span class="post-date">Oct 14, 2026 · 5 min read</span>
+        </div>
+        <h3>From Classroom to Code — What 14 Years of Teaching Taught Me About Data</h3>
+        <p class="post-ex">Data science is less about machines and more about explaining complicated things before
+          Friday. Seven schools, two labs and an HOD chair taught me that.</p>
+        <span class="post-read">Read the story
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA ===================== -->
+<section class="cta" id="contact" aria-label="Contact">
+  <div class="cta-media" role="img" aria-label="A person standing on a mountain ridge at sunrise"></div>
+  <div class="wrap cta-inner">
+    <div>
+      <h2>Ready to Turn Your Data<br>Into a Competitive Advantage?</h2>
+      <p class="cta-sub">Let's build something extraordinary together.</p>
+      <a href="mailto:bhobho.blessing@gmail.com" class="btn btn-gold">
+        Get In Touch
+        <svg class="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <ul class="contact-chips" aria-label="Contact details">
+        <li><a href="tel:+27810606050" title="Call Billy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.13 1 .37 1.97.72 2.9a2 2 0 0 1-.45 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.45c.93.35 1.9.6 2.9.72a2 2 0 0 1 1.7 2z"/></svg>
+          <span class="chip-label">+27 81 0606 050</span>
+        </a></li>
+        <li><a href="https://wa.me/27810606050" target="_blank" rel="noopener" title="Chat on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413z"/></svg>
+          <span class="chip-label">WhatsApp</span>
+        </a></li>
+        <li><a href="mailto:bhobho.blessing@gmail.com" title="Email Billy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span class="chip-label">bhobho.blessing@gmail.com</span>
+        </a></li>
+        <li><a href="https://x.com/Braggsman" target="_blank" rel="noopener" title="Follow BDG on X">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>
+          <span class="chip-label">@Braggsman</span>
+        </a></li>
+        <li><a class="chip-addr" href="https://www.google.com/maps/search/?api=1&query=2872%20Bejikufa%2C%20Kabokweni%2C%20Nelspruit%2C%201200%2C%20MP%2C%20South%20Africa" target="_blank" rel="noopener" title="Open location in Google Maps">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span class="chip-label">2872, Bejikufa, Kabokweni, Nelspruit, 1200, MP, SA</span>
+        </a></li>
+      </ul>
+    </div>
+    <img class="cta-logo" src="images/logo-stacked.png" alt="Billy Data Genius logo — Data, Digital, Solutions" style="filter:drop-shadow(0 10px 26px rgba(0,0,0,.5))">
+  </div>
+</section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <small>© 2026 Billy Data Genius — Data. Insights. Impact.</small>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#top">Back to top</a>
+      <a href="#contact">Privacy</a>
+      <a href="#contact">Terms</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  /* sticky header */
+  var header = document.getElementById('siteHeader');
+  var onScroll = function(){ header.classList.toggle('solid', window.scrollY > 12); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* mobile nav */
+  var toggle = document.getElementById('navToggle');
+  var mobile = document.getElementById('mobileNav');
+  toggle.addEventListener('click', function(){
+    var open = mobile.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  mobile.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      mobile.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    });
+  });
+
+  /* reveal on scroll */
+  var reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:.15, rootMargin:'0px 0px -6% 0px'});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* scroll-spy for nav */
+  var spyLinks = document.querySelectorAll('.main-nav a[data-spy]');
+  var sections = ['home','about','services','work','blog','contact']
+    .map(function(id){ return document.getElementById(id); }).filter(Boolean);
+  var spySection = function(id){
+    spyLinks.forEach(function(l){
+      l.classList.toggle('active', l.getAttribute('data-spy') === id);
+    });
+  };
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        spySection(e.target.id);
+      });
+    }, {rootMargin:'-30% 0px -40% 0px'});
+    sections.forEach(function(s){ spy.observe(s); });
+    /* page end: pin Contact even when the CTA band sits below the observation zone */
+    window.addEventListener('scroll', function(){
+      var top = window.scrollY || document.documentElement.scrollTop;
+      if (top > 10 && top + window.innerHeight >= document.documentElement.scrollHeight - 2) spySection('contact');
+    }, {passive: true});
+  }
+
+  /* featured-work carousel */
+  var viewport = document.getElementById('carViewport');
+  var prev = document.getElementById('carPrev');
+  var next = document.getElementById('carNext');
+  var dots = Array.prototype.slice.call(document.getElementById('carDots').children);
+  function cardStep(){
+    var t = document.getElementById('carTrack');
+    var first = t.children[0], second = t.children[1];
+    return second ? second.offsetLeft - first.offsetLeft : first.offsetWidth;
+  }
+  function count(){ return document.getElementById('carTrack').children.length; }
+  function index(){ return Math.max(0, Math.min(count()-1, Math.round(viewport.scrollLeft / cardStep()))); }
+  function render(){
+    var cur = index();
+    prev.disabled = viewport.scrollLeft <= 4;
+    next.disabled = viewport.scrollLeft >= viewport.scrollWidth - viewport.clientWidth - 4;
+    dots.forEach(function(d,i){ d.classList.toggle('active', i === cur); });
+  }
+  function go(i){
+    var maxIndex = count()-1;
+    i = Math.max(0, Math.min(maxIndex, i));
+    viewport.scrollTo({left: i * cardStep(), behavior:'smooth'});
+  }
+  prev.addEventListener('click', function(){ go(index()-1); });
+  next.addEventListener('click', function(){ go(index()+1); });
+  dots.forEach(function(d, i){ d.addEventListener('click', function(){ go(i); }); });
+  viewport.addEventListener('scroll', render, {passive:true});
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
+</body>
+</html>
