@@ -28,9 +28,29 @@
     <nav class="main-nav" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="services.html" class="active">Services</a>
+      <div class="nav-drop">
+        <a href="services.html" class="active">Services<svg class="drop-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="nav-menu">
+          <span class="menu-head">Our Services</span>
+          <a href="services.html">All Services</a>
+          <a href="services.html#svc-analytics">Data Sciences &amp; Analytics</a>
+          <a href="services.html#svc-marketing">Digital Marketing</a>
+          <a href="services.html#svc-web">Web Development</a>
+          <a href="services.html#svc-brand">Brand Strategy</a>
+          <a href="services.html#svc-design">Graphic Design</a>
+        </div>
+      </div>
       <a href="portfolio.html">Portfolio</a>
-      <a href="blog.html">Blog</a>
+      <div class="nav-drop">
+        <a href="blog.html">Blog<svg class="drop-caret" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+        <div class="nav-menu">
+          <span class="menu-head">From the Blog</span>
+          <a href="blog.html">All Posts</a>
+          <a href="blog/data-into-solutions.html">Why I Built Billy Data Genius</a>
+          <a href="blog/data-is-a-language.html">Data Is a Language</a>
+          <a href="blog/classroom-to-code.html">From Classroom to Code</a>
+        </div>
+      </div>
       <a href="contact.html">Contact</a>
     </nav>
     <a href="contact.html" class="btn btn-gold header-cta" style="font-size:12.5px; padding:10px 20px">
@@ -62,7 +82,7 @@
       <h2 class="rail-title">Services</h2>
     </div>
     <div class="cards">
-      <article class="card reveal" style="--ac:#5AA9FF; --ac-soft:rgba(90,169,255,.55)">
+      <article id="svc-analytics" class="card reveal" style="--ac:#5AA9FF; --ac-soft:rgba(90,169,255,.55)">
         <div class="card-art" aria-hidden="true"><img src="images/services-art-1.jpg" alt=""></div>
         <div class="card-body">
         <span class="card-icon" aria-hidden="true">
@@ -74,7 +94,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
-      <article class="card reveal" style="--ac:#F2B33D; --ac-soft:rgba(242,179,61,.55)">
+      <article id="svc-marketing" class="card reveal" style="--ac:#F2B33D; --ac-soft:rgba(242,179,61,.55)">
         <div class="card-art" aria-hidden="true"><img src="images/services-art-2.jpg" alt=""></div>
         <div class="card-body">
         <span class="card-icon" aria-hidden="true">
@@ -86,7 +106,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
-      <article class="card reveal" style="--ac:#37D690; --ac-soft:rgba(55,214,144,.55)">
+      <article id="svc-web" class="card reveal" style="--ac:#37D690; --ac-soft:rgba(55,214,144,.55)">
         <div class="card-art" aria-hidden="true"><img src="images/services-art-3.jpg" alt=""></div>
         <div class="card-body">
         <span class="card-icon" aria-hidden="true">
@@ -98,7 +118,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
-      <article class="card reveal" style="--ac:#8B6FF7; --ac-soft:rgba(139,111,247,.55)">
+      <article id="svc-brand" class="card reveal" style="--ac:#8B6FF7; --ac-soft:rgba(139,111,247,.55)">
         <div class="card-art" aria-hidden="true"><img src="images/services-art-4.jpg" alt=""></div>
         <div class="card-body">
         <span class="card-icon" aria-hidden="true">
@@ -110,7 +130,7 @@
           <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
-      <article class="card reveal" style="--ac:#F45FA2; --ac-soft:rgba(244,95,162,.55)">
+      <article id="svc-design" class="card reveal" style="--ac:#F45FA2; --ac-soft:rgba(244,95,162,.55)">
         <div class="card-art" aria-hidden="true"><img src="images/services-art-5.jpg" alt=""></div>
         <div class="card-body">
         <span class="card-icon" aria-hidden="true">
