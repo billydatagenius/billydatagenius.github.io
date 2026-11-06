@@ -3,7 +3,7 @@ server.js
 PROMPT.md
 qa-*
 *.log
-tools-*.ps1
+tools-*
 
 # source/unused assets — the published site references only the files PROMPT.md lists
 images/*-original.jpg

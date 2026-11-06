@@ -78,6 +78,7 @@
 <section class="hero" id="home" aria-label="Intro">
   <div class="hero-media" role="img" aria-label="The Billy Data Genius founder in a BDG hoodie, focused beside a glowing holographic globe of global data networks â€” Better Data. Smarter Decisions. Bigger Opportunities."></div>
   <div class="hero-grad"></div>
+  <canvas id="globeCanvas" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <p class="hero-eyebrow reveal">Welcome to <span>Billy Data Genius</span></p>
@@ -96,6 +97,7 @@
       </div>
     </div>
   </div>
+  <canvas id="droneCanvas" aria-hidden="true"></canvas>
 </section>
 
 <!-- ===================== EXPLORE ===================== -->
@@ -176,5 +178,8 @@
 </footer>
 
 <script src="site.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="js/hero3d.js" defer></script>
 </body>
 </html>
