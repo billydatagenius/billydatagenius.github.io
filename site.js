@@ -68,4 +68,36 @@
     window.addEventListener('resize', render);
     render();
   }
+
+  /* consultation form (consult.html) */
+  var cform = document.getElementById('consultForm');
+  if (cform){
+    var cta = document.getElementById('waSend');
+    if (cta){
+      cta.addEventListener('click', function(){
+        var g = function(n){
+          var el = cform.querySelector('[name="' + n + '"]');
+          return el ? el.value.trim() : '';
+        };
+        var lines = [
+          'Hi Billy Data Genius! I would like a free consultation.',
+          'Name: ' + (g('name') || '(not given)'),
+          'Email: ' + (g('email') || '(not given)'),
+          'Phone: ' + (g('phone') || '(not given)'),
+          'Organisation: ' + (g('organisation') || '(not given)'),
+          'Help needed: ' + g('service'),
+          'Message: ' + (g('message') || '(not given)')
+        ].join('\n');
+        window.open('https://wa.me/27810606050?text=' + encodeURIComponent(lines), '_blank');
+      });
+    }
+    var ok = document.getElementById('formSuccess');
+    var sent = window.location.search.indexOf('sent=1') !== -1;
+    if (sent && ok){
+      cform.style.display = 'none';
+      ok.classList.add('show');
+      var sec = document.getElementById('form-sec') || document.querySelector('.form-sec');
+      if (sec) sec.scrollIntoView({ block: 'start' });
+    }
+  }
 })();
