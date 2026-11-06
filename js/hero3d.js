@@ -87,7 +87,7 @@
        translucent so the baked hologram's network glows through) */
     globe.add(new THREE.Mesh(
       new THREE.SphereGeometry(R * 0.986, 48, 48),
-      new THREE.MeshBasicMaterial({ color: 0x06182e, transparent: true, opacity: 0.86 })
+      new THREE.MeshBasicMaterial({ color: 0x06182e, transparent: true, opacity: 0.78 })
     ));
 
     /* fresnel rim tint on the sphere surface */
@@ -138,7 +138,10 @@
       [19.07, 72.87, 'Mumbai'], [1.35, 103.82, 'Singapore'], [35.68, 139.69, 'Tokyo'],
       [37.56, 126.97, 'Seoul'], [-33.86, 151.2, 'Sydney'], [-23.55, -46.63, 'Sao Paulo'],
       [30.04, 31.23, 'Cairo'], [6.52, 3.37, 'Lagos'], [43.65, -79.38, 'Toronto'],
-      [52.52, 13.4, 'Berlin']
+      [52.52, 13.4, 'Berlin'], [37.77, -122.42, 'San Francisco'], [41.88, -87.63, 'Chicago'],
+      [19.43, -99.13, 'Mexico City'], [-34.6, -58.38, 'Buenos Aires'], [40.42, -3.7, 'Madrid'],
+      [22.91, -43.17, 'Rio de Janeiro'], [-1.29, 36.82, 'Nairobi'], [-6.21, 106.85, 'Jakarta'],
+      [41.01, 28.98, 'Istanbul'], [-33.92, 18.42, 'Cape Town']
     ];
     var goldCities = {};
     CITIES.forEach(function(c){ if (HUB[c[2]]) goldCities[c[2]] = true; });
@@ -157,33 +160,28 @@
           var y = Math.min(359, Math.max(0, Math.round((90 - lat) / 180 * 360)));
           return md[(y * 720 + x) * 4] > 127;
         };
-        function nearestCity(lon, lat){
-          var best = null, bd = 1e9;
-          CITIES.forEach(function(c){
-            var d = (c[0] - lat) * (c[0] - lat) + (c[1] - lon) * (c[1] - lon);
-            if (d < bd){ bd = d; best = c[2]; }
-          });
-          return best || '';
-        }
-        var N = isMobile() ? 9000 : 15000;
-        var blue = [], gold = [], ga = Math.PI * (3 - Math.sqrt(5));
+        var N = isMobile() ? 30000 : 72000;   /* random sphere samples -> ~29% land keeps a dense look */
+        var b0 = [], b1 = [], gold = [];
         for (var i = 0; i < N; i++){
-          var y = 1 - (i / (N - 1)) * 2;
-          var rad = Math.sqrt(Math.max(0, 1 - y * y));
-          var th = ga * i;
-          var p = new THREE.Vector3(Math.cos(th) * rad, y, Math.sin(th) * rad);
-          var lat = Math.asin(y) * 180 / Math.PI;
+          /* uniform random direction (no fibonacci lattice rows) */
+          var z = Math.random() * 2 - 1;
+          var rad = Math.sqrt(Math.max(0, 1 - z * z));
+          var th = Math.random() * Math.PI * 2;
+          var p = new THREE.Vector3(rad * Math.cos(th), z, rad * Math.sin(th));
+          var lat = Math.asin(z) * 180 / Math.PI;
           var lon = Math.atan2(p.z, -p.x) * 180 / Math.PI - 180;
           lon = ((lon % 360) + 540) % 360 - 180;
           if (!isLand(lon, lat)) continue;
           /* gold only in a small halo around a hub city, subtle otherwise */
-          var bd = 1e9;
+          var nearest = '', bd = 1e9;
           CITIES.forEach(function(c){
             var d2 = (c[0] - lat) * (c[0] - lat) + (c[1] - lon) * (c[1] - lon);
-            if (d2 < bd) bd = d2;
+            if (d2 < bd){ bd = d2; nearest = c[2]; }
           });
-          if (goldCities[nearestCity(lon, lat)] && HUB[nearestCity(lon, lat)] && bd < 130) gold.push(p.clone().multiplyScalar(R * 1.004));
-          else blue.push(p.clone().multiplyScalar(R * (1.002 + (i % 7) * 0.0007)));
+          var v = p.clone().multiplyScalar(R * (1.002 + Math.random() * 0.005));
+          if (goldCities[nearest] && bd < 130) gold.push(v);
+          else if (Math.random() < 0.42) b0.push(v);   /* bright tier */
+          else b1.push(v);                              /* dim fill tier */
         }
         function mk(arr, color, size, opacity){
           if (!arr.length) return;
@@ -196,8 +194,36 @@
             depthWrite: false, blending: THREE.AdditiveBlending
           })));
         }
-        mk(blue, 0x5aa9ff, 0.0165, 0.8);
-        mk(gold, 0xf2c14e, 0.026, 0.92);
+        function mkLines(pairs, color, opacity){
+          if (pairs.length < 2) return;
+          var pos = new Float32Array(pairs.length * 3);
+          pairs.forEach(function(v, i){ pos[i * 3] = v.x; pos[i * 3 + 1] = v.y; pos[i * 3 + 2] = v.z; });
+          var g = new THREE.BufferGeometry();
+          g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+          globe.add(new THREE.LineSegments(g, new THREE.LineBasicMaterial({
+            color: color, transparent: true, opacity: opacity,
+            blending: THREE.AdditiveBlending, depthWrite: false
+          })));
+        }
+        mk(b0, 0x8ec6ff, 0.0135, 0.95);
+        mk(b1, 0x3f7fd0, 0.010, 0.7);
+        mk(gold, 0xf6c95c, 0.023, 0.95);
+        /* continent-spanning network veins: connect near-neighbour land dots */
+        var landAll = b0.concat(b1, gold);
+        var veinA = [], veinB = [];
+        var K = isMobile() ? 300 : 680;
+        for (var k = 0; k < K && landAll.length > 2; k++){
+          var a = landAll[(Math.random() * landAll.length) | 0];
+          var best = null, bestD = 0.34;
+          for (var tr = 0; tr < 14; tr++){
+            var cand = landAll[(Math.random() * landAll.length) | 0];
+            var dd = a.distanceTo(cand);
+            if (dd > 0.018 && dd < bestD){ bestD = dd; best = cand; }
+          }
+          if (best) (Math.random() < 0.14 ? veinB : veinA).push(a, best);
+        }
+        mkLines(veinA, 0x2f8dff, 0.15);
+        mkLines(veinB, 0xf2b33d, 0.3);
       } catch (e) { /* mask unavailable: sphere + cities still render */ }
     };
 
@@ -210,13 +236,23 @@
       var nodes = [];
       CITIES.forEach(function(c, idx){
         var isHub = !!goldCities[c[2]];
+        /* big soft glow halo behind each node (the "city glow" look) */
+        var halo = new THREE.Sprite(new THREE.SpriteMaterial({
+          map: isHub ? texGold : texCyan, transparent: true, opacity: 0.34,
+          blending: THREE.AdditiveBlending, depthWrite: false
+        }));
+        halo.position.copy(latLon(c[0], c[1], R * 1.010));
+        halo.scale.setScalar(isHub ? 0.30 : 0.19);
+        halo.userData = { phase: idx * 0.7, base: isHub ? 0.30 : 0.19 };
+        globe.add(halo);
+        nodes.push(halo);
         var sp = new THREE.Sprite(new THREE.SpriteMaterial({
-          map: isHub ? texGold : texCyan, transparent: true, opacity: isHub ? 0.95 : 0.7,
+          map: isHub ? texGold : texCyan, transparent: true, opacity: isHub ? 1 : 0.8,
           blending: THREE.AdditiveBlending, depthWrite: false
         }));
         sp.position.copy(latLon(c[0], c[1], R * 1.012));
-        sp.scale.setScalar(isHub ? 0.085 : 0.06);
-        sp.userData = { phase: idx * 0.7, base: isHub ? 0.085 : 0.06 };
+        sp.scale.setScalar(isHub ? 0.10 : 0.065);
+        sp.userData = { phase: idx * 0.7 + 0.3, base: isHub ? 0.10 : 0.065 };
         globe.add(sp);
         nodes.push(sp);
       });
@@ -267,12 +303,12 @@
         fragmentShader:
           'uniform vec3 c; varying vec3 vN; varying vec3 vV;' +
           'void main(){ float f = pow(0.62 - dot(vN, vV), 3.0);' +
-          ' gl_FragColor = vec4(c, clamp(f, 0.0, 1.0) * 0.55); }'
+          ' gl_FragColor = vec4(c, clamp(f, 0.0, 1.0) * 0.62); }'
       })
     ));
     var halo = new THREE.Sprite(new THREE.SpriteMaterial({
       map: radialTexture('rgba(46,145,255,.5)', 'rgba(46,145,255,0)'),
-      transparent: true, opacity: 0.26, blending: THREE.AdditiveBlending, depthWrite: false
+      transparent: true, opacity: 0.32, blending: THREE.AdditiveBlending, depthWrite: false
     }));
     halo.scale.setScalar(R * 3.2);
     globe.add(halo);
