@@ -582,11 +582,11 @@ main.sub{padding-top:var(--header-h)}
 
 /* ---------- fixed vertical brand band (right edge, desktop) ---------- */
 .bdg-sideband{
-  position:fixed; top:86px; bottom:14px; right:0; width:38px; z-index:55;
+  position:fixed; top:86px; bottom:14px; left:0; width:38px; z-index:55;
   pointer-events:none;
-  border-radius:19px 0 0 19px;
+  border-radius:0 19px 19px 0;
   background:linear-gradient(180deg, #040b16 0%, #0a2444 46%, #1b5fa0 100%);
-  box-shadow:-6px 0 18px rgba(0,0,0,.35);
+  box-shadow:6px 0 18px rgba(0,0,0,.35);
   display:flex; align-items:center; justify-content:center;
 }
 .bdg-sideband b{
