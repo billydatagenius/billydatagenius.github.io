@@ -101,3 +101,11 @@
     }
   }
 })();
+/* ---------- fixed vertical brand band (desktop; decorative, non-interactive) ---------- */
+(function(){
+  var b = document.createElement('div');
+  b.className = 'bdg-sideband';
+  b.setAttribute('aria-hidden', 'true');
+  b.innerHTML = '<b>BILLY DATA GENIUS</b>';
+  document.body.appendChild(b);
+})();
