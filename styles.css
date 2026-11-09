@@ -595,3 +595,8 @@ main.sub{padding-top:var(--header-h)}
   letter-spacing:.34em; text-transform:uppercase; color:#fff; white-space:nowrap;
 }
 @media (max-width:1023px), (max-height:560px){ .bdg-sideband{display:none} }
+/* keep the fixed band clear of the About collage (panel-1 founder photo is edge-flush);
+   the section's own navy background fills the reserved 38px stride seamlessly */
+@media (min-width:1024px){
+  .about-band{ padding-left:38px }
+}
