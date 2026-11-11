@@ -421,7 +421,7 @@ h1,h2,h3,p{margin:0}
 .contact-chips svg{width:14px; height:14px; flex:none; color:var(--gold)}
 .contact-chips .chip-label{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .contact-chips .chip-addr{max-width:100%}
-.cta-logo{height:clamp(110px, 10vw, 134px); width:auto; flex-shrink:0}
+.cta-logo{position:absolute; z-index:2; right:clamp(24px, 3.4vw, 48px); bottom:clamp(20px, 3.4vw, 34px); height:clamp(64px, 6vw, 84px); width:auto}
 .cta .brand-caption{display:none}
 
 /* ================= footer ================= */
@@ -501,12 +501,12 @@ h1,h2,h3,p{margin:0}
   .about-band{grid-template-columns:1fr}
   .car-track{grid-auto-columns:88%}
   .car-arrows{display:none}
-  .cta-inner{flex-direction:column; align-items:flex-start; gap:8px; padding-top:44px; padding-bottom:44px}
+  .cta-inner{flex-direction:column; align-items:flex-start; gap:8px; padding-top:44px; padding-bottom:110px}
   .cta h2{max-width:none}
 
   .contact-chips{gap:8px}
   .contact-chips a{font-size:11.5px; padding:8px 12px}
-  .cta-logo{order:-1; height:96px}
+  .cta-logo{height:58px; right:14px; bottom:14px}
 }
 /* sub-page main offset (fixed header overlays the first section) */
 main.sub{padding-top:var(--header-h)}
