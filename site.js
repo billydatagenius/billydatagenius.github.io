@@ -109,3 +109,44 @@
   b.innerHTML = '<b>BILLY DATA GENIUS</b>';
   document.body.appendChild(b);
 })();
+
+/* ---------- services: expandable detail panels + deep links ---------- */
+(function(){
+  var cards = document.querySelectorAll('.cards .card');
+  if (!cards.length) return;
+  var panels = document.querySelectorAll('.svc-panel');
+  function setBtn(card, open){
+    var b = card.querySelector('button.learn');
+    if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  function closeAll(){
+    for (var i = 0; i < panels.length; i++) panels[i].hidden = true;
+    for (var j = 0; j < cards.length; j++) setBtn(cards[j], false);
+  }
+  function toggle(card, scroll){
+    var panel = document.getElementById(card.id + '-panel');
+    if (!panel) return;
+    var wasOpen = !panel.hidden;
+    closeAll();
+    if (wasOpen) return;
+    panel.hidden = false;
+    setBtn(card, true);
+    if (scroll) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  for (var k = 0; k < cards.length; k++){
+    (function(card){
+      var btn = card.querySelector('button.learn');
+      if (!btn) return;
+      btn.setAttribute('aria-controls', card.id + '-panel');
+      btn.addEventListener('click', function(){ toggle(card, true); });
+    })(cards[k]);
+  }
+  function fromHash(){
+    var h = window.location.hash || '';
+    if (h.indexOf('#svc-') !== 0) return;
+    var card = document.getElementById(h.slice(1));
+    if (card && card.classList.contains('card')) toggle(card, true);
+  }
+  window.addEventListener('hashchange', fromHash);
+  if (window.location.hash) window.setTimeout(fromHash, 80);
+})();
