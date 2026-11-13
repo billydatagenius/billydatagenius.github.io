@@ -405,17 +405,22 @@ h1,h2,h3,p{margin:0}
 .post-card:hover .post-read svg{transform:translateX(4px)}
 
 /* ================= CTA ================= */
-.cta{position:relative; overflow:hidden; min-height:calc(100vh - var(--header-h)); display:flex; align-items:center; background:#081220}
+.cta{position:relative; overflow:hidden; min-height:calc(100vh - var(--header-h)); display:flex; align-items:stretch; background:#081220}
 .cta-media{position:absolute; inset:0; background:url("images/contact-sunrise.jpg") no-repeat center 58%; background-size:cover}
 .cta::before{content:""; position:absolute; inset:0; z-index:1;
   background:linear-gradient(88deg, rgba(6,14,26,.96) 6%, rgba(6,14,26,.70) 42%, rgba(6,14,26,.20) 78%),
              linear-gradient(180deg, rgba(6,14,26,.60) 0%, rgba(6,14,26,0) 24%, rgba(6,14,26,0) 68%, rgba(6,14,26,.62) 100%)}
-.cta-inner{position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:36px; width:min(var(--container), 100% - clamp(40px, 6.4vw, 72px)); margin-inline:auto}
+.cta-inner{position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; width:min(var(--container), 100% - clamp(40px, 6.4vw, 72px)); margin-inline:auto}
 .cta h2{font-size:clamp(1.3rem, 1.95vw, 1.75rem); font-weight:700; line-height:1.3; color:#fff; max-width:24ch}
 .cta .cta-sub{margin-top:9px; font-size:13.5px; color:#C4D6EA}
 .cta .btn{margin-top:20px; font-size:12.5px; padding:11px 22px}
 
 .contact-chips{display:flex; flex-wrap:wrap; gap:10px 12px; margin:22px 0 0; padding:0; list-style:none; max-width:640px}
+/* contacts sit on the section's bottom edge, baseline-aligned with the corner logo;
+   the heading cluster floats centred in the remaining space above them */
+.cta-inner > div{display:flex; flex-direction:column; align-items:flex-start; flex:1}
+.cta h2{margin-top:auto}
+.cta .contact-chips{margin:auto 0 clamp(20px, 3.4vw, 34px); padding-right:150px}
 .contact-chips a{display:inline-flex; align-items:center; gap:8px; font-size:12.5px; color:var(--gold); background:rgba(255,255,255,.05); border:1px solid rgba(255,214,112,.26); padding:9px 14px; border-radius:999px; text-decoration:none; transition:background .25s, border-color .25s, transform .25s}
 .contact-chips a:hover{background:rgba(255,214,112,.12); border-color:rgba(255,214,112,.6); transform:translateY(-1px)}
 .contact-chips svg{width:14px; height:14px; flex:none; color:var(--gold)}
@@ -501,11 +506,13 @@ h1,h2,h3,p{margin:0}
   .about-band{grid-template-columns:1fr}
   .car-track{grid-auto-columns:88%}
   .car-arrows{display:none}
-  .cta-inner{flex-direction:column; align-items:flex-start; gap:8px; padding-top:44px; padding-bottom:110px}
+  .cta-inner{flex-direction:column; align-items:flex-start; gap:8px; padding-top:44px}
   .cta h2{max-width:none}
 
   .contact-chips{gap:8px}
   .contact-chips a{font-size:11.5px; padding:8px 12px}
+  .chip-addr .chip-label{min-width:0; max-width:172px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+  .cta .contact-chips{margin-bottom:14px; padding-right:86px}
   .cta-logo{height:58px; right:14px; bottom:14px}
 }
 /* sub-page main offset (fixed header overlays the first section) */
