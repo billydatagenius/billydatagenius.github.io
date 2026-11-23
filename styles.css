@@ -334,7 +334,8 @@ h1,h2,h3,p{margin:0}
 }
 .car-viewport::-webkit-scrollbar{display:none}
 .car-track{display:grid; grid-auto-flow:column; grid-auto-columns:calc((100% - 48px)/3); gap:24px}
-.work-card{scroll-snap-align:start}
+.work-card{scroll-snap-align:start; display:block; text-decoration:none; color:inherit}
+a.work-card{cursor:pointer}
 .work-thumb{aspect-ratio:1200/640; border-radius:12px; overflow:hidden;
   box-shadow:0 14px 34px rgba(15,37,71,.14); transition:transform .3s, box-shadow .3s}
 .work-card:hover .work-thumb{transform:translateY(-4px); box-shadow:0 20px 44px rgba(15,37,71,.2)}
