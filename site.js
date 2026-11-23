@@ -137,10 +137,19 @@
     (function(card){
       var btn = card.querySelector('button.learn');
       if (!btn) return;
+      var panel = document.getElementById(card.id + '-panel');
       btn.setAttribute('aria-controls', card.id + '-panel');
       btn.addEventListener('click', function(){ toggle(card, true); });
+      var close = panel && panel.querySelector('.svc-close');
+      if (close) close.addEventListener('click', function(){
+        closeAll();
+        btn.focus();
+      });
     })(cards[k]);
   }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && document.querySelector('.svc-panel:not([hidden])')) closeAll();
+  });
   function fromHash(){
     var h = window.location.hash || '';
     if (h.indexOf('#svc-') !== 0) return;
